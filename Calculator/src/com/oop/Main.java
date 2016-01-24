@@ -1,6 +1,7 @@
 package com.oop;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,8 +11,8 @@ public class Main {
         JFrame frame = new JFrame("Calculator");
         final JPanel panel = new JPanel();
 
-        final JTextField inputOne = new JTextField("", 10);
-        final JTextField inputTwo = new JTextField("", 10);
+        final JTextField inputOne = new JTextField("", 15);
+        final JTextField inputTwo = new JTextField("", 15);
         final JLabel label = new JLabel();
 
         JButton add = new JButton("+");
@@ -27,7 +28,7 @@ public class Main {
                 double result = value1 + value2;
                 String reply = String.valueOf(result);
 
-                label.setText(reply);
+                label.setText("= " + reply);
                 label.setVisible(true);
                 panel.add(label);
             }
@@ -46,9 +47,7 @@ public class Main {
                 double result = value1 - value2;
                 String reply = String.valueOf(result);
 
-                label.setText(reply);
-                label.setVerticalTextPosition(JLabel.BOTTOM);
-                label.setHorizontalTextPosition(JLabel.CENTER);
+                label.setText("= " + reply);
                 label.setVisible(true);
                 panel.add(label);
 
@@ -68,9 +67,7 @@ public class Main {
                 double result = value1 * value2;
                 String reply = String.valueOf(result);
 
-                label.setText(reply);
-                label.setVerticalTextPosition(JLabel.BOTTOM);
-                label.setHorizontalTextPosition(JLabel.CENTER);
+                label.setText("= " + reply);
                 label.setVisible(true);
                 panel.add(label);
             }
@@ -89,15 +86,13 @@ public class Main {
                 double result = value1 / value2;
                 String reply = String.valueOf(result);
 
-                label.setText(reply);
-                label.setVerticalTextPosition(JLabel.BOTTOM);
-                label.setHorizontalTextPosition(JLabel.CENTER);
+                label.setText("= " + reply);
                 label.setVisible(true);
                 panel.add(label);
             }
         });
 
-        frame.setSize(200, 300);
+        frame.setSize(200, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(false);
@@ -106,6 +101,7 @@ public class Main {
 
         inputOne.setVisible(true);
         inputTwo.setVisible(true);
+
         panel.add(inputOne);
         panel.add(add);
         panel.add(subtract);
