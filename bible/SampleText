@@ -1,0 +1,3 @@
+This is a bunch of text
+It is going to be loaded by a file reader and buffered reader
+Then it will be printed out
