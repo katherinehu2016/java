@@ -20,7 +20,7 @@ public class Main {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
-
+</Line>
             while (line != null) {
                 sb.append(line);
                 sb.append(System.lineSeparator());
@@ -38,24 +38,39 @@ public class Main {
         FileUtil.getContents(bookContents, fCaption);
 
         String contents = "";
+        int chapterNum = 0;
+        int lineNum = 0;
 
         //Loop through the ArrayList and reformat the content
         for (int i = 0; i < bookContents.size(); i++) {
             String line = (String)bookContents.get(i);
             if (line.equals("Philippians")) {
-                line = "Book: " + line + "\n";
+                line = "<Book>" + "\n";
                 contents = contents + line;
-            } else if (line.startsWith("Chapter")) {
-                line = "Chapter: " + line + "\n";
+            } else if (line.startsWith("Chapter") && chapterNum == 0) {
+                chapterNum ++;
+                line = "<Chapter number=\"" +  chapterNum + "\">" + "\n";
                 contents = contents + line;
-            } else if (line.startsWith("[")) {
-                line = "Verse: " + line + "\n";
+            } else if (line.startsWith("Chapter") && chapterNum > 0) {
+                lineNum = 0;
+                chapterNum ++;
+                line = "</Chapter>" + "\n" + "<Chapter number=\"" +  chapterNum + "\">" + "\n";
+                contents = contents + line;
+            }else if (line.startsWith("[")) {
+                lineNum ++;
+                if (lineNum < 10) {
+                    line = line.substring(3).trim();
+                } else if (lineNum > 10 || lineNum == 10) {
+                    line = line.substring(4).trim();
+                }
+                line = "<Line number=\"" + lineNum + "\">" + line + "</Line>" + "\n";
                 contents = contents + line;
             } else if (line.equals("")) {
             }
         }
 
-       // System.out.println(contents);
+        String end = "</Chapter>\n" + "</Book>";
+        contents = contents + end;
 
         writeFile(contents, "Result.txt");
         System.out.print("Done!");
