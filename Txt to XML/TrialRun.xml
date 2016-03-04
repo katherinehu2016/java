@@ -1,0 +1,12 @@
+<directory name="Popular Fiction">
+    <world name="Harry Potter series">
+        <character number="1">Harry Potter</character>
+        <character number="2">Hermione Granger</character>
+        <character number="3">Ron Weasley</character>
+    </world>
+    <world name="Hunger Games">
+        <character number="1">Katniss Everdeen</character>
+        <character number="2">Peeta Mellark</character>
+        <character number="3">Hamitch</character>
+    </world>
+</directory>
