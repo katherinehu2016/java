@@ -16,13 +16,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int folderLength = new File("bible_books_KJV").listFiles().length;
         int bookNum;
 
-        for (int i = 0; i < folderLength; i++) {
+        for (int i = 0; i < 2; i++) {
 
             bookNum = i + 1;
-            ArrayList bookContents = new ArrayList();
 
             File fCaption;
 
@@ -32,11 +30,7 @@ public class Main {
                 fCaption = new File("bible_books_KJV/" + bookNum + ".txt");
             }
 
-            getContents(bookContents, fCaption);
-
             String contents = "";
-            int chapterNum = 0;
-            int lineNum = 0;
 
             File inputFile = fCaption;
             DocumentBuilderFactory dbFactory
@@ -59,60 +53,22 @@ public class Main {
             }
 
             doc.getDocumentElement().normalize();
-            /*System.out.println("Directory: "
-                    + doc.getDocumentElement().getAttribute("name"));
-            NodeList nlWorld = doc.getElementsByTagName("world");
-            System.out.println("----------------------------");
-            for (int temp = 0; temp < nlWorld.getLength(); temp++) {
-                Node nWorld = nlWorld.item(temp);
-                Element eWorld = (Element) nWorld;
-                System.out.println("World: "
-                        + eWorld.getAttribute("name"));
-                NodeList nlCharacter = eWorld.getElementsByTagName("character");
-                for (int k = 0; k < nlCharacter.getLength(); k++) {
-                    Node nCharacter = nlCharacter.item(i);
-                    Element eCharacter = (Element) nCharacter;
-                    System.out.println("Character: "
-                            + eCharacter.getAttribute("number")
-                            + "\n"
-                            + eCharacter.getTextContent()
-                    );
 
-                }
-            }*/
-
-            //Loop through the ArrayList and reformat the content
-            for (int j = 0; j < bookContents.size(); j++) {
-                String line = (String)bookContents.get(j);
-                if (line.startsWith("<Book")) {
-                    line = "<Book=\"" + line.substring(27) + "\">\n";
-                    contents = contents + line;
-                } else if (line.startsWith("Chapter") && chapterNum == 0) {
-                    chapterNum ++;
-                    line = "<Chapter number=\"" +  chapterNum + "\">" + "\n";
-                    contents = contents + line;
-                } else if (line.startsWith("Chapter") && chapterNum > 0) {
-                    lineNum = 0;
-                    chapterNum ++;
-                    line = "</Chapter>" + "\n" + "<Chapter number=\"" +  chapterNum + "\">" + "\n";
-                    contents = contents + line;
-                }else if (line.startsWith("[")) {
-                    lineNum ++;
-                    if (lineNum < 10) {
-                        line = line.substring(3).trim();
-                    } else if (lineNum > 10 || lineNum == 10) {
-                        line = line.substring(4).trim();
-                    }
-                    line = "<Line number=\"" + lineNum + "\">" + line + "</Line>" + "\n";
-                    contents = contents + line;
-                } else if (line.equals("")) {
+            NodeList nlChapter = doc.getElementsByTagName("Chapter");
+            contents = contents + "Bible, King James Version\n";
+            for (int j = 0; j < nlChapter.getLength(); j++){
+                Node nChapter = nlChapter.item(j);
+                Element eChapter = (Element) nChapter;
+                contents = contents + "Chapter " + eChapter.getAttribute("number") + "\n";
+                NodeList nlLine = eChapter.getElementsByTagName("Line");
+                for (int k = 0; k < nlLine.getLength(); k++) {
+                    Node nLine = nlLine.item(k);
+                    Element eLine = (Element) nLine;
+                    contents = contents + "[" + eLine.getAttribute("number") + "]" + eLine.getTextContent() + "\n";
                 }
             }
 
-            String end = "</Chapter>\n" + "</Book>";
-            contents = contents + end;
-
-            String result = "bible_books_KJV/";
+            String result = "Result Files/";
             if (bookNum < 10) {
                 result = result + "0" + bookNum + ".txt";
             } else {

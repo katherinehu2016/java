@@ -1,4 +1,4 @@
-<Book="Exodus">
+<Book>
 <Chapter number="1">
 <Line number="1">Now these are the names of the children of Israel, which came into Egypt; every man and his household came with Jacob.</Line>
 <Line number="2">Reuben, Simeon, Levi, and Judah,</Line>
