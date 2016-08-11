@@ -13,7 +13,7 @@
 <title>Welcome to the Online Bible!</title>
 </head>
 
-<body>
+<body link=blue vlink=blue>
 
 <table border=0>
 
@@ -33,12 +33,11 @@
 		String id = resultSet.getString("book_id");
 		String name = resultSet.getString("book_name");
 		String number = resultSet.getString("book_number");
-		
 %>
 
 <tr>
-	<td><%=name %>
-	<% 
+	<td><a href='chapters.jsp?book=<%=number %>'><%=name %></a>
+	<%
 	} 
 	books.closeConnection();
 %>

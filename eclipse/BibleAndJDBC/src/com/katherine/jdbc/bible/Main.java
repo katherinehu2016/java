@@ -23,8 +23,8 @@ public class Main {
 	
 	static int verseNum;
 	static String verse;
-	static int chapter;
-
+	static String chapter;
+	static int bookNum;
 
     public static void main(String[] args) throws Exception {
 
@@ -38,13 +38,17 @@ public class Main {
     	
         int folderLength = new File("files").listFiles().length;
         folderLength = folderLength + 62;
-        int bookNum;
 
         for (int i = 62; i < folderLength; i++) {
         	
         	int lineNum = 0;
+        	
+        	if (i==62){
+        		bookNum=59;
+        	} else {
+        		bookNum=i;
+        	}
 
-            bookNum = i + 1;
             ArrayList bookContents = new ArrayList();
 
             File fCaption = new File("files/" + bookNum + ".txt");
@@ -54,6 +58,10 @@ public class Main {
             //Loop through the ArrayList and reformat the content
             for (int j = 0; j < bookContents.size(); j++) {
                 String line = (String)bookContents.get(j);
+                if (line.startsWith("Chapter")) {
+                	chapter = line.substring(7).trim();
+                	lineNum = 0;
+                }
                 if (line.startsWith("[")) {
                     lineNum ++;
                     if (lineNum < 10) {
@@ -61,9 +69,8 @@ public class Main {
                     } else if (lineNum > 10 || lineNum == 10) {
                         line = line.substring(4).trim();
                     }
-                    verseNum = lineNum;
                     verse = line;
-                    chapter = bookNum;
+                    verseNum = lineNum;
                     try {
             			hello.addToTable();
             		} catch (Exception e){
@@ -144,14 +151,15 @@ private void addToTable() throws Exception {
 	Connection dbConnection = null;
 	PreparedStatement preparedStatement = null;
 
-	String deleteSQL = "INSERT INTO `verse` (verse_number, verse_content, chapter_id) VALUES (?, ?, ?);";
+	String deleteSQL = "INSERT INTO `verse` (verse_number, verse_content, book_number, chapter_number) VALUES (?, ?, ?, ?);";
 
 	try {
 		dbConnection = getDBConnection();
 		preparedStatement = dbConnection.prepareStatement(deleteSQL);
 		preparedStatement.setInt(1, verseNum);
 		preparedStatement.setString(2, verse);
-		preparedStatement.setInt(3, chapter);
+		preparedStatement.setInt(3, bookNum);
+		preparedStatement.setInt(4, Integer.parseInt(chapter));
 		
 
 		// execute delete SQL statement
@@ -216,11 +224,13 @@ private void writeResultSet(ResultSet resultSet) throws SQLException {
 		String id = resultSet.getString("verse_id");
 		String name = resultSet.getString("verse_number");
 		String number = resultSet.getString("verse_content");
-		String cId = resultSet.getString("chapter_id");
+		String bookNum = resultSet.getString("book_number");
+		String chapNum = resultSet.getString("chapter_number");
 		System.out.println("id: " + id);
 		System.out.println("name: " + name);
 		System.out.println("number: " + number);
-		System.out.println("chapter: " + cId);
+		System.out.println("book: " + bookNum);
+		System.out.println("chapter: " + chapNum);
 	}
 }
 
