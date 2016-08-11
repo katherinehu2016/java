@@ -28,9 +28,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-    	Main hello = new Main();
+    	Main main = new Main();
 		try {
-			hello.readDataBase();
+			main.readDataBase();
 
 		} catch (Exception e){
 			
@@ -72,7 +72,7 @@ public class Main {
                     verse = line;
                     verseNum = lineNum;
                     try {
-            			hello.addToTable();
+            			main.addToTable();
             		} catch (Exception e){
             		}
                 } else {
@@ -151,18 +151,17 @@ private void addToTable() throws Exception {
 	Connection dbConnection = null;
 	PreparedStatement preparedStatement = null;
 
-	String deleteSQL = "INSERT INTO `verse` (verse_number, verse_content, book_number, chapter_number) VALUES (?, ?, ?, ?);";
+	String insertSQL = "INSERT INTO `verse` (verse_number, verse_content, book_number, chapter_number) VALUES (?, ?, ?, ?);";
 
 	try {
 		dbConnection = getDBConnection();
-		preparedStatement = dbConnection.prepareStatement(deleteSQL);
+		preparedStatement = dbConnection.prepareStatement(insertSQL);
 		preparedStatement.setInt(1, verseNum);
 		preparedStatement.setString(2, verse);
 		preparedStatement.setInt(3, bookNum);
 		preparedStatement.setInt(4, Integer.parseInt(chapter));
 		
 
-		// execute delete SQL statement
 		preparedStatement.executeUpdate();
 
 		System.out.println("Record is added!");
