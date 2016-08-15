@@ -19,6 +19,7 @@ public class Main {
         int bookNum;
 
         for (int i = 0; i < 2; i++) {
+        	//get contents of files
 
             bookNum = i + 1;
 
@@ -53,6 +54,8 @@ public class Main {
             }
 
             doc.getDocumentElement().normalize();
+            
+            //reformat contents to xml
 
             NodeList nlChapter = doc.getElementsByTagName("Chapter");
             contents = contents + "Bible, King James Version\n";

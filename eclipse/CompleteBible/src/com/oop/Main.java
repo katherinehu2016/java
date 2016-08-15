@@ -13,6 +13,7 @@ public class Main {
 
         for (int i = 0; i < folderLength; i++) {
 
+        	//get the file contents
             bookNum = i + 1;
             ArrayList bookContents = new ArrayList();
 

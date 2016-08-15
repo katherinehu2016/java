@@ -7,13 +7,15 @@ import java.awt.event.ActionListener;
 public class Main {
 
 	public static void main(String[] args) {
+		//create the window and text fields of the calculator
 		JFrame frame = new JFrame("Calculator");
 		final JPanel panel = new JPanel();
-
+		
 		final JTextField inputOne = new JTextField("", 15);
 		final JTextField inputTwo = new JTextField("", 15);
 		final JLabel label = new JLabel();
 
+		//create the four buttons
 		JButton add = new JButton("+");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,6 +85,7 @@ public class Main {
 			}
 		});
 
+		//set properties of window, text fields, and buttons
 		frame.setSize(200, 150);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

@@ -6,24 +6,6 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String args[]) {
-		/*
-		 * String x = "Hello word";
-		 * 
-		 * if (x.startsWith("hello")) { System.out.println("haha, i am studpid"
-		 * ); }
-		 * 
-		 * 
-		 * System.exit(-1);
-		 * 
-		 * try(BufferedReader br = new BufferedReader(new
-		 * FileReader("50-o.txt"))) { StringBuilder sb = new StringBuilder();
-		 * String line = br.readLine();
-		 * 
-		 * </Line> while (line != null) { sb.append(line);
-		 * sb.append(System.lineSeparator()); line = br.readLine(); } String
-		 * everything = sb.toString(); System.out.print(everything); } catch
-		 * (IOException e) { e.printStackTrace(); }
-		 */
 
 		// Load txt file into an ArrayList
 		ArrayList bookContents = new ArrayList();
