@@ -5,7 +5,6 @@ import java.sql.Statement;
 
 public class User extends DBObject {
 	private String username;
-	
 	private String password;
 	private String userid;
 	
@@ -30,6 +29,62 @@ public class User extends DBObject {
 		
 		closeConnection();
 		return result;
+	}
+	
+	public String getFont (String username) {
+		openConnection();
+		String font = null;
+		try {
+			Statement st = con.createStatement();
+			String sql = "SELECT * FROM user WHERE username = '" + username + "'";
+			ResultSet res = st.executeQuery(sql);
+			
+			if (res.next()){
+				font = res.getString("font");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return font;
+	}
+	
+	public void setFont (String username, String font) {
+		openConnection();
+		try {
+			Statement st = con.createStatement();
+			String sql = "UPDATE `user` SET `font` = '" + font + "' WHERE `user`.`username` = '" + username + "'";
+			st.execute(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getFontSize (String username) {
+		openConnection();
+		int fontSize = 0;
+		try {
+			Statement st = con.createStatement();
+			String sql = "SELECT * FROM user WHERE username = '" + username + "'";
+			ResultSet res = st.executeQuery(sql);
+			
+			if (res.next()){
+				fontSize = res.getInt("fontsize");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fontSize;
+	}
+	
+	public void setFontSize (String username, int fontsize) {
+		openConnection();
+		try {
+			Statement st = con.createStatement();
+			String sql = "UPDATE `user` SET `fontsize` = " + fontsize + " WHERE `user`.`username` = '" + username + "'";
+			st.execute(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int addUser (String username, String password) {

@@ -42,12 +42,12 @@ if (request.getParameter("action")!= null && request.getParameter("action").equa
 <form id="frmLogin" action="login.jsp" method="post">
 	<table align="center" cellpadding="0" cellspacing="0" border="0" width="90%">
 		<tr>
-			<td align="right"><b>Username:</b></td>
+			<td align="right"><font face="Georgia"><b>Username:</b></font></td>
 			<td width="10">&nbsp;</td>
 			<td><input type="text" id="txtUsername" name="txtUsername" value=""/></td>
 		</tr>
 		<tr>
-			<td align="right"><b>Password:</b></td>
+			<td align="right"><font face="Georgia"><b>Password:</b></font></td>
 			<td>&nbsp;</td>
 			<td> <input type="password" id="txtPassword" name="txtPassword" value=""></td>
 		</tr>
@@ -63,7 +63,7 @@ if (request.getParameter("action")!= null && request.getParameter("action").equa
 			<td></td>
 			<td>&nbsp;</td>
 			<td>
-				<font color="red"><%=errorMsg %></font>
+				<font face="Georgia" color="red"><%=errorMsg %></font>
 			</td>
 		</tr>
 	</table>
